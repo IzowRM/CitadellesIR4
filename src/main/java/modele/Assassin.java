@@ -2,8 +2,6 @@ package modele;
 
 import controleur.Interaction;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
 
 public class Assassin extends Personnage{
 

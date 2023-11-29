@@ -3,8 +3,6 @@ package application;
 import controleur.Interaction;
 import modele.*;
 
-import java.util.HashMap;
-
 public class Configuration {
 
     // Methods qui crée les 54 quartiers pour la pioche
@@ -109,8 +107,5 @@ public class Configuration {
         ajouterPersonnages(p);
         ajouterJoueurs(p);
         quartiersMerveilles(pc);
-        return p;
-    }
-
-
+        return p;}
 }
