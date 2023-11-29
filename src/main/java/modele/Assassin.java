@@ -15,14 +15,13 @@ public class Assassin extends Personnage{
     @Override
     public void utiliserPouvoir() {
         boolean continu = true;
-        Interaction interaction = new Interaction();
         // pose la question à l'utilisateur
         System.out.println("Quel personnage voulez-vous assassiner ?");
         // récupère le choix de l'utilisateur
         super.listePersonnagesDisponibles();
 
         do {
-          int  choix = interaction.lireUnEntier(1, this.getPlateau().getNombrePersonnages(), "Votre choix entre: ");
+          int  choix = Interaction.lireUnEntier(1, this.getPlateau().getNombrePersonnages(), "Votre choix entre: ");
             if (this.getPlateau().getPersonnage(choix - 1).equals(this)) {
                 System.out.println("Vous ne pouvez pas vous assassiner vous même");
 

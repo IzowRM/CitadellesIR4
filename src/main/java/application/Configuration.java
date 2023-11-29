@@ -74,11 +74,11 @@ public class Configuration {
     // va créer la méthode configurationDeBase
     //Methode qui ajoute les joueurs au plateau
     private static void ajouterJoueurs(PlateauDeJeu p) {
-        Interaction inter = new Interaction();
-        int a = inter.lireUnEntier(2, 4, "Combien de joueurs ?");
+
+        int a = Interaction.lireUnEntier(2, 4, "Combien de joueurs ?");
         for (int i = 0; i < a; i++) {
             System.out.println("Nom du joueur " + i);
-            String name = inter.lireUneChaine();
+            String name = Interaction.lireUneChaine();
             Joueur j = new Joueur(name);
             p.ajouterJoueur(j);
         }

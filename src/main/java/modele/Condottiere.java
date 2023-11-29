@@ -10,14 +10,14 @@ public class Condottiere extends Personnage {
     @Override
     public void utiliserPouvoir() {
         //Variables
-        Interaction interaction = new Interaction();
+
         boolean choixDejoueurCorrect = true;
         boolean choixDeQuartierCorrect = true;
 
         //Demande pour détruire un quartier
 
         System.out.println("Voulez vous détruire un quartier ?");
-        boolean yesOrNo = interaction.lireOuiOuNon();
+        boolean yesOrNo = Interaction.lireOuiOuNon();
         if (!yesOrNo) {
             System.out.println("Vous n'avez pas détruit de quartier");
         } else {
@@ -28,7 +28,7 @@ public class Condottiere extends Personnage {
             do {
                 listePersonnagesDisponibles();
                 System.out.println("Il vous reste " + this.getJoueur().nbPieces() + " pièces dans votre trésor.");
-                choixJoueur = interaction.lireUnEntier(0, this.getPlateau().getNombreJoueurs(), "Quel joueur voulez vous attaquer? ( pour ne rien faire)");
+                choixJoueur = Interaction.lireUnEntier(0, this.getPlateau().getNombreJoueurs(), "Quel joueur voulez vous attaquer? ( pour ne rien faire)");
 
 
                 if (this.getPlateau().getJoueur(choixJoueur - 1).nbQuartiersDansCite() == 0) {
@@ -41,7 +41,7 @@ public class Condottiere extends Personnage {
 
             do {
 
-                int choixQuartier = interaction.lireUnEntier(1, this.getPlateau().getJoueur(choixJoueur - 1).nbQuartiersDansCite(), "Quel quartier voulez vous détruire?");
+                int choixQuartier = Interaction.lireUnEntier(1, this.getPlateau().getJoueur(choixJoueur - 1).nbQuartiersDansCite(), "Quel quartier voulez vous détruire?");
 
                 if (this.getPlateau().getJoueur(choixJoueur - 1).getCite()[choixQuartier - 1].getCout() > this.getJoueur().nbPieces()) {
 

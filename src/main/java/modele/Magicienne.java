@@ -31,20 +31,20 @@ public class Magicienne extends Personnage {
     @Override
     public void utiliserPouvoir() {
 
-        Interaction interaction = new Interaction();
+
 
         boolean continu = true;
         //demande pour l'échange des cartes.
         System.out.println("Vous avez " + this.getJoueur().nbQuartiersDansMain() + " Carte dans votre main, voulez Voulez-vous echanger vos cartes avec celles d’un autre joueur ?\n" +
                 "(o/n)");
-        boolean yesOrNo = interaction.lireOuiOuNon();
+        boolean yesOrNo = Interaction.lireOuiOuNon();
         if (yesOrNo) {
 
             do {
                 System.out.println("Avec qui voulez vous échanger vos cartes ?");
                 // récupère le choix de l'utilisateur
                 listePersonnagesDisponibles();
-                int choix = interaction.lireUnEntier(1, this.getPlateau().getNombrePersonnages(), "Votre choix entre: ");
+                int choix = Interaction.lireUnEntier(1, this.getPlateau().getNombrePersonnages(), "Votre choix entre: ");
                 //échange les mains des joueurs
 
 
@@ -65,7 +65,7 @@ public class Magicienne extends Personnage {
                 System.out.println("Combien de cartes voulez vous échanger ? Il reste "+this.getPlateau().getPioche().nombreElements()
                         +"Carte dans la pioche, Et  vous avez Vous avez " + this.getJoueur().nbQuartiersDansMain()+" Carte");
 
-                int nb = interaction.lireUnEntier(0, this.getJoueur().nbQuartiersDansMain(), "Votre choix entre: ");
+                int nb = Interaction.lireUnEntier(0, this.getJoueur().nbQuartiersDansMain(), "Votre choix entre: ");
                 // Action à prendre en fonction du nombre de cartes à échanger
                 if (nb == 0) {
                     System.out.println("Vous n'avez pas échangé de cartes");
@@ -88,7 +88,7 @@ public class Magicienne extends Personnage {
                     for (int i = 0; i < nb; i++) {
                         System.out.println("Vous avez" + this.getJoueur().nbQuartiersDansMain() +" carte dans votre main. Quelle carte voulez vous échanger ?");
                         listeLaMainDuJoueur(this.getJoueur());
-                        int choix = interaction.lireUnEntier(1, this.getJoueur().nbQuartiersDansMain(), "Votre choix: ");
+                        int choix = Interaction.lireUnEntier(1, this.getJoueur().nbQuartiersDansMain(), "Votre choix: ");
                         copieMain.add( this.getJoueur().getMain().get(choix-1));
                         this.getJoueur().getMain().remove(choix-1);
                     }
