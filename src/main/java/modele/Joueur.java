@@ -111,7 +111,7 @@ public class Joueur {
     public Quartier retirerUnQuartierDansMain(int n){
         Quartier q;
         q = main.get(n);
-       this.main.remove(q);
+        this.main.remove(q);
         return q;
     }
     public Quartier retirerQuartierDansMain() {

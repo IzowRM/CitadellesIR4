@@ -43,7 +43,6 @@ public abstract class Personnage {
     }
 
     public Joueur getJoueur() {
-        this.joueur.monPersonnage = this;
         return joueur;
     }
     public void setJoueur(Joueur joueur) {
@@ -80,7 +79,9 @@ public abstract class Personnage {
         assassine = false;
         vole = false;
         joueur = null;
-        this.joueur.monPersonnage= null;
+        if (this.joueur != null){
+            this.joueur.monPersonnage= null;
+        }
     }
 
     public PlateauDeJeu getPlateau() {
