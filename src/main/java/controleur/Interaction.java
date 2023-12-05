@@ -3,6 +3,7 @@ package controleur;
 import Exeption.OuiNonException;
 
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Interaction {
@@ -81,6 +82,11 @@ public class Interaction {
         retour= sc.nextLine();
         return retour;
     }
+    public static int returnInt(int i){
+        Random random = new Random();
 
+        // Générer un chiffre aléatoire entre 0 (inclus) et 4 (exclus)
+        return random.nextInt(i);
+    }
 
 }
