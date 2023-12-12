@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public abstract class Personnage {
     private String nom;
     private Integer rang;
+    private boolean isHidden;
+    private boolean ispick;
     private String caracteristique;
     private boolean assassine;
     private boolean vole;
@@ -18,7 +20,22 @@ public abstract class Personnage {
         joueur= null;
         vole= false;
         assassine= false;
+        isHidden = false;
+        ispick = false;
     }
+    public boolean getIspick(){
+        return ispick;
+    }
+    public void setIspick(boolean ispick){
+        this.ispick = ispick;
+    }
+    public boolean getIsHidden(){
+        return isHidden;
+    }
+    public void setIsHidden(boolean isHidden){
+        this.isHidden = isHidden;
+    }
+
     public Personnage() {
 
     }
@@ -51,6 +68,12 @@ public abstract class Personnage {
     public void setAssassine() {
         this.assassine = true;
     }
+    public void reinitialiserAssassine(){
+        this.assassine = false;
+    }
+    public void reinitialiserVole(){
+        this.vole = false;
+    }
     public void setVole() {
         this.vole = true;
     }
@@ -75,14 +98,11 @@ public abstract class Personnage {
             }
         }
     public abstract void utiliserPouvoir();
-    public abstract void utiliserPouvoirAvatar();
     public void reinitialiser(){
         assassine = false;
         vole = false;
         joueur = null;
-        if (this.joueur != null){
-            this.joueur.monPersonnage= null;
-        }
+        this.joueur.monPersonnage= null;
     }
 
     public PlateauDeJeu getPlateau() {

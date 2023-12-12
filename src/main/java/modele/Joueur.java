@@ -11,6 +11,7 @@ public class Joueur {
     private Quartier[] cite;
     private ArrayList<Quartier> main;
     protected Personnage monPersonnage;
+    private boolean isOrdinateur;
 
     public Joueur(String nom) {
         this.nom = nom;
@@ -20,8 +21,15 @@ public class Joueur {
         this.cite = new Quartier[8];
         this.main = new ArrayList<Quartier>();
         this.monPersonnage = null;
+        this.isOrdinateur = false;
     }
 
+    public void setIsOrdinateur() {
+        this.isOrdinateur = true;
+    }
+    public boolean getIsOrdinateur() {
+        return this.isOrdinateur;
+    }
     public String getNom() {
         return nom;
     }
@@ -74,9 +82,12 @@ public class Joueur {
     }
 
     public void ajouterQuartierDansCite(Quartier quartier1) {
-        if (nbQuartiers < 8) {
+
+        if (nbQuartiers < 8 && quartier1.getCout()<=tresor) {
             cite[nbQuartiers] = quartier1;
             nbQuartiers++;
+        } else if (quartier1.getCout()>tresor){
+            System.out.println("Vous n'avez pas les fonds pour construire ce quartier.");
         }
     }
     public boolean quartierPresentDansCite(String s) {
@@ -104,14 +115,16 @@ public class Joueur {
         }
         return null;
     }
-
+    public void piocherUnQuartier(Pioche p){
+       ajouterQuartierDansMain( p.piocher());
+    }
     public void ajouterQuartierDansMain(Quartier quartier1) {
         main.add(quartier1);
     }
     public Quartier retirerUnQuartierDansMain(int n){
         Quartier q;
         q = main.get(n);
-        this.main.remove(q);
+       this.main.remove(q);
         return q;
     }
     public Quartier retirerQuartierDansMain() {
@@ -128,7 +141,9 @@ public class Joueur {
     public Personnage getPersonnage(){
         return monPersonnage;
     }
-
+    public void setPersonnage(Personnage p){
+        monPersonnage = p;
+    }
     public void reinitialiser() {
         tresor = 0;
         main.clear();
@@ -136,6 +151,7 @@ public class Joueur {
             cite[i] = null;
         }
     }
+
 
 
 }

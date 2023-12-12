@@ -6,6 +6,7 @@ import java.util.Collections;
 public class Pioche {
     private ArrayList<Quartier> list ;
     public Pioche() {
+
         this.list = new ArrayList<Quartier>();
     }
     public Quartier piocher() {
@@ -19,7 +20,7 @@ public class Pioche {
     }
     public void ajouter(Quartier q) {
         list.add(q);
-        System.out.println("Ajout dans la piche: " + q);
+//        System.out.println("Ajout dans la pioche: " + q);
     }
     public int nombreElements() {
         return list.size();
