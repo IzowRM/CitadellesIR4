@@ -3,22 +3,35 @@ package application;
 import controleur.Interaction;
 import modele.*;
 
+
 public class Configuration {
 
-    // Methods qui cr�e les 54 quartiers pour la pioche
+    // Methods qui crée les 54 quartiers pour la pioche
     public static Pioche nouvellePioche() {
         Pioche p = new Pioche();
-
         quartiersReligieux(p);
         quartiersMilitaire(p);
         quartiersCommercants(p);
         quartierNobles(p);
+        quartiersMerveilles(p);
+        System.out.println("Pioche créée elle comprend " + p.nombreElements()+ " cartes");
         return p;
     }
 
+    public static PlateauDeJeu configurationDeBase(Pioche pc) {
+
+
+        PlateauDeJeu p = new PlateauDeJeu();
+        p.setPioche(pc);
+        ajouterPersonnages(p);
+        ajouterJoueurs(p);
+        return p;
+    }
+
+
     private static void quartiersReligieux(Pioche p) {
         Quartier a;
-        String[] nom = {"temple", "temple", "temple", "�glise", "�glise", "�glise", "monast�re", "monast�re", "monast�re", "cath�drale", "cath�drale"};
+        String[] nom = {"temple", "temple", "temple", "église", "église", "église", "monastère", "monastère", "monastère", "cathédrale", "cathédrale"};
         Integer[] cout = {1, 1, 1, 2, 2, 2, 3, 3, 3, 5, 5};
         for (int i = 0; i < 11; i++) {
             a = new Quartier(nom[i], "RELIGIEUX", cout[i]);
@@ -40,7 +53,7 @@ public class Configuration {
 
     private static void quartiersCommercants(Pioche p) {
         Quartier a;
-        String[] nom = {"taverne", "taverne", "taverne", "taverne", "taverne", "�choppe", "�choppe", "�choppe", "march�", "march�", "march�", "march�", "comptoir", "comptoir", "comptoir", "port", "port", "port", "h�tel de ville", "h�tel de ville"};
+        String[] nom = {"taverne", "taverne", "taverne", "taverne", "taverne", "échoppe", "échoppe", "échoppe", "marché", "marché", "marché", "marché", "comptoir", "comptoir", "comptoir", "port", "port", "port", "hôtel de ville", "hôtel de ville"};
         Integer[] cout = {1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5};
         for (int i = 0; i < 20; i++) {
             a = new Quartier(nom[i], "COMMERCANT", cout[i]);
@@ -58,10 +71,10 @@ public class Configuration {
         }
     }
 
-    //Impl�mentation des Merveilles
+    //Implémentation des Merveilles
     private static void quartiersMerveilles(Pioche p) {
         Quartier a;
-        String[] nom = {"Laboratoire", "Biblioth�que", "Carri�re", "Forge", "Manufacture", "Salle des Cartes", "Statue Equestre", "Tr�sor Imp�rial", "Tripot", "Fontaine aux Souhaits", "Ecole de Magie", "Dracoport", "Donjon", "Cour des Miracles"};
+        String[] nom = {"Laboratoire", "Bibliothèque", "Carrière", "Forge", "Manufacture", "Salle des Cartes", "Statue Equestre", "Trésor Impérial", "Tripot", "Fontaine aux Souhaits", "Ecole de Magie", "Dracoport", "Donjon", "Cour des Miracles"};
         Integer[] cout = {5, 6, 5, 5, 5, 5, 3, 5, 6, 5, 6, 6, 3, 2};
         for (int i = 0; i < 14; i++) {
             a = new Quartier(nom[i], "MERVEILLE", cout[i]);
@@ -69,18 +82,24 @@ public class Configuration {
         }
     }
 
-    // va cr�er la m�thode configurationDeBase
+    // va créer la méthode configurationDeBase
     //Methode qui ajoute les joueurs au plateau
-    private static void ajouterJoueurs(PlateauDeJeu p) {
 
-        int a = Interaction.lireUnEntier(2, 4, "Combien de joueurs ?");
-        for (int i = 0; i < a; i++) {
-            System.out.println("Nom du joueur " + i);
-            String name = Interaction.lireUneChaine();
-            Joueur j = new Joueur(name);
-            p.ajouterJoueur(j);
+    public static void ajouterJoueurs(PlateauDeJeu p) {
+        System.out.println("Quel est le Nom du joueur ?");
+        String name = Interaction.lireUneChaine();
+        Joueur j = new Joueur(name);
+        p.ajouterJoueur(j);
+        for (int i = 0; i < 3; i++) {
+            String nameOrdinateur = "Ordinateur " + (i + 1) ;
+            Joueur jO = new Joueur(nameOrdinateur);
+            jO.setIsOrdinateur();
+            p.ajouterJoueur(jO);
         }
     }
+    // Methode qui ajoute les joueurs au plateau
+    // Methode qui ajoute les joueurs au plateau
+
 
     // Method qui ajoute les personnages au plateau
     private static void ajouterPersonnages(PlateauDeJeu plateau) {
@@ -99,16 +118,12 @@ public class Configuration {
             plateau.ajouterPersonnage(personnage);
         }
     }
-
-    public static PlateauDeJeu configurationDeBase(Pioche pc) {
-
-        quartiersMerveilles(pc);
+    public static  PlateauDeJeu cinfigurationMulti(Pioche pc){
         PlateauDeJeu p = new PlateauDeJeu();
         ajouterPersonnages(p);
         ajouterJoueurs(p);
         quartiersMerveilles(pc);
         return p;
     }
-
 
 }

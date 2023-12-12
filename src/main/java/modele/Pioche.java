@@ -4,31 +4,33 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Pioche {
-    private ArrayList<Quartier> list ;
+    private ArrayList<Quartier> listPioche;
     public Pioche() {
 
-        this.list = new ArrayList<Quartier>();
+        this.listPioche = new ArrayList<Quartier>();
     }
+
     public Quartier piocher() {
         Quartier q ;
-        if (!list.isEmpty()) {
-            q=list.get(0);
-            list.remove(0);
+
+        if (!listPioche.isEmpty()) {
+            q= listPioche.get(0);
+            listPioche.remove(0);
             return q;
         }
         return null;
     }
     public void ajouter(Quartier q) {
-        list.add(q);
+        listPioche.add(q);
 //        System.out.println("Ajout dans la pioche: " + q);
     }
     public int nombreElements() {
-        return list.size();
+        return listPioche.size();
     }
     public void melanger(){
 
-        if (!list.isEmpty()){
-            Collections.shuffle(list);
+        if (!listPioche.isEmpty()){
+            Collections.shuffle(listPioche);
         }
     }
 }

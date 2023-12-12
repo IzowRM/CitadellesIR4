@@ -98,6 +98,8 @@ public abstract class Personnage {
             }
         }
     public abstract void utiliserPouvoir();
+    public abstract void utiliserPouvoirAvatar();
+
     public void reinitialiser(){
         assassine = false;
         vole = false;

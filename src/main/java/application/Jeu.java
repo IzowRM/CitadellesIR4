@@ -116,7 +116,9 @@ public class Jeu {
 
     private void initialisation() {
         Pioche pioche = Configuration.nouvellePioche();
+
         this.plateau = Configuration.configurationDeBase(pioche);
+        System.out.println("Nombre de carte dans l'initialisation" + this.plateau.getPioche().nombreElements());
         for (int i = 0; i < this.plateau.getNombreJoueurs(); i++) {
             this.plateau.getJoueur(i).ajouterPieces(2);
             for (int j = 0; j < 4; j++) {
@@ -173,7 +175,7 @@ public class Jeu {
         for (int i = 0; i < this.plateau.getNombrePersonnages(); i++) {
             // 1) Le personnage est-il assassiné ?
             Joueur j = this.plateau.getPersonnage(i).getJoueur();
-            if (!this.plateau.getPersonnage(i).getAssassine()) {
+            if (!this.plateau.getPersonnage(i).getAssassine()&&!this.plateau.getPersonnage(i).getIsHidden()) {
                 //le personnage est volé.
                 if (this.plateau.getPersonnage(i).getVole()) {
 
@@ -214,7 +216,9 @@ public class Jeu {
         int choixjoueurs = Interaction.lireUnEntier(1, 2, "Que faite vous ?: ");
         //Si le joueurs choisi les cartes
         if (choixjoueurs == 1) {
-            ArrayList<Quartier> choixDecarte = null;
+
+            ArrayList<Quartier> choixDecarte = new ArrayList<>();
+            System.out.println("Nombre de cates dans pioches "+this.plateau.getPioche().nombreElements());
             choixDecarte.add(this.plateau.getPioche().piocher());
             choixDecarte.add(this.plateau.getPioche().piocher());
             System.out.println("Vous avez pioché: " + choixDecarte.get(0) + " et " + choixDecarte.get(1));
@@ -287,11 +291,12 @@ public class Jeu {
         List<Personnage> personnageList = new ArrayList<>();
         personnageList.addAll(Arrays.asList(this.plateau.getListePersonnages()));
 
-        System.out.println("Liste des personnages: ");
+
 
         //Set les personnages face visible et face caché
         setHiddenPersonnage(personnageList);
-
+        System.out.println("Taille de la liste des personnages: " + personnageList.size());
+        System.out.println("Liste des personnages: ");
         boolean continu = true;
         for (int j = 0; j < 4; j++) {
 
@@ -305,11 +310,10 @@ public class Jeu {
                     if (this.plateau.getJoueur(ordreJoueur.get(j)).getIsOrdinateur()) {
                         // Choix du personnage
                         int choix = new Random().nextInt(personnageList.size());
-
-                        this.plateau.getJoueur(ordreJoueur.get(j)).setPersonnage(personnageList.get(choix-1));
-                        personnageList.get(choix-1).setJoueur(this.plateau.getJoueur(ordreJoueur.get(j)));
-                        personnageList.get(choix-1).setIspick(true);
-                        personnageList.remove(choix - 1);
+                        this.plateau.getJoueur(ordreJoueur.get(j)).setPersonnage(personnageList.get(choix));
+                        personnageList.get(choix).setJoueur(this.plateau.getJoueur(ordreJoueur.get(j)));
+                        personnageList.get(choix).setIspick(true);
+                        personnageList.remove(choix);
                         //Acconce le personnage choisi
                         continu = false;
 
