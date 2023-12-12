@@ -1,5 +1,7 @@
 package modele;
 
+import java.util.Random;
+
 import controleur.Interaction;
 
 public class Condottiere extends Personnage {
@@ -30,11 +32,14 @@ public class Condottiere extends Personnage {
                 System.out.println("Il vous reste " + this.getJoueur().nbPieces() + " pi�ces dans votre tr�sor.");
                 choixJoueur = Interaction.lireUnEntier(0, this.getPlateau().getNombreJoueurs(), "Quel joueur voulez vous attaquer? ( pour ne rien faire)");
 
-
-                if (this.getPlateau().getJoueur(choixJoueur - 1).nbQuartiersDansCite() == 0) {
-                    System.out.println("Le joueur que vous avez choisi n'as pas de quartier � detruire.");
-                } else {
-                    choixDejoueurCorrect = false;
+                if(this.getPlateau().getJoueur(choixJoueur-1).getPersonnage().getRang() != 5 || this.getPlateau().getJoueur(choixJoueur-1).getPersonnage().getAssassine()){
+                    if (this.getPlateau().getJoueur(choixJoueur - 1).nbQuartiersDansCite() == 0) {
+                        System.out.println("Le joueur que vous avez choisi n'as pas de quartier � detruire.");
+                    } else {
+                        choixDejoueurCorrect = false;
+                    }
+                }else{
+                    System.out.println("Le joueur que vous avez choisi est un évéque, vous ne pouvez pas détruire.");
                 }
             } while (choixDejoueurCorrect);
 
@@ -92,6 +97,66 @@ public class Condottiere extends Personnage {
     }
 
     public void utiliserPouvoirAvatar() {
-        System.out.println("NOT READY");
+        boolean choixDejoueurCorrect = true;
+        boolean choixDeQuartierCorrect = true;
+
+        System.out.println("Voulez vous d�truire un quartier ?");
+        boolean yesOrNo = new Random().nextBoolean();
+        System.out.println(yesOrNo);
+        if (!yesOrNo) {
+            System.out.println("Vous n'avez pas d�truit de quartier");
+        } else {
+            System.out.println("Voici la liste des joueurs avec leurs cit�.: ");
+
+            int choixJoueur = new Random().nextInt(this.getPlateau().getNombreJoueurs())+1;
+            do {
+                listePersonnagesDisponibles();
+                System.out.println("Il vous reste " + this.getJoueur().nbPieces() + " pi�ces dans votre tr�sor.");
+                System.out.println("Quel joueur voulez vous attaquer? ( pour ne rien faire)");
+                System.out.println(choixJoueur);
+                if(this.getPlateau().getJoueur(choixJoueur-1).getPersonnage().getRang() != 5 || this.getPlateau().getJoueur(choixJoueur-1).getPersonnage().getAssassine()){
+                    if (this.getPlateau().getJoueur(choixJoueur - 1).nbQuartiersDansCite() == 0){
+                        System.out.println("Le joueur que vous avez choisi n'as pas de quartier � detruire.");
+                        choixJoueur++;
+                        if(choixJoueur>this.getPlateau().getNombreJoueurs()){
+                            choixJoueur=0;
+                        }
+                    } else {
+                        choixDejoueurCorrect = false;
+                    }
+                }else{
+                    System.out.println("Le joueur que vous avez choisi est un évéque, vous ne pouvez pas détruire.");
+                    choixJoueur++;
+                    if(choixJoueur>this.getPlateau().getNombreJoueurs()){
+                        choixJoueur=0;
+                    }
+                }
+
+            } while (choixDejoueurCorrect);
+
+
+            int choixQuartier = new Random().nextInt(this.getPlateau().getJoueur(choixJoueur - 1).nbQuartiersDansCite()+1);
+            do {
+
+                System.out.println("Quel quartier voulez vous d�truire?");
+                System.out.println(choixQuartier);
+
+                if (this.getPlateau().getJoueur(choixJoueur - 1).getCite()[choixQuartier - 1].getCout() > this.getJoueur().nbPieces()) {
+
+                    System.out.println("Vous n'avez pas asser de pieces pour d�truire ce quartier choisissez en un autre. Il vous reste: " +
+                            this.getJoueur().nbPieces() + " piece d'or dans votre tresor.");
+
+                    choixQuartier++;
+                    if(choixQuartier>this.getPlateau().getJoueur(choixJoueur - 1).nbQuartiersDansCite()){
+                        choixQuartier=1;
+                    }
+                } else {
+
+                    this.getJoueur().retirerPieces(this.getPlateau().getJoueur(choixJoueur - 1).getCite()[choixQuartier - 1].getCout());
+                    this.getPlateau().getJoueur(choixJoueur - 1).getCite()[choixQuartier - 1] = null;
+                    choixDeQuartierCorrect = false;
+                }
+            } while (choixDeQuartierCorrect);
+        }
     }
 }

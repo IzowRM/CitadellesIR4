@@ -1,5 +1,7 @@
 package modele;
 
+import java.util.Random;
+
 import controleur.Interaction;
 
 
@@ -30,10 +32,26 @@ public class Assassin extends Personnage{
         } while (continu);
     }
 
-    // Listes les peronnages disponibles
-
     public void utiliserPouvoirAvatar() {
-        System.out.println("NOT READY");
-    }
+        boolean continu = true;
+        System.out.println("Quel personnage voulez-vous assassiner ?");
+        super.listePersonnagesDisponibles();
 
+        int choix = new Random().nextInt(this.getPlateau().getNombrePersonnages()) + 1;
+        do {
+            System.out.println("Votre choix entre: "+this.getPlateau().getNombrePersonnages());
+            System.out.println(choix);
+            if (this.getPlateau().getPersonnage(choix - 1).equals(this)) {
+                System.out.println("Vous ne pouvez pas vous assassiner vous m�me");
+                choix++;
+                if(choix>this.getPlateau().getNombrePersonnages()){
+                    choix=1;
+                }
+            } else {
+                this.getPlateau().getPersonnage(choix - 1).setAssassine();
+                continu = false;
+            }
+
+        } while (continu);
+    }
 }
