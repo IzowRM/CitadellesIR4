@@ -64,6 +64,7 @@ public abstract class Personnage {
     }
     public void setJoueur(Joueur joueur) {
         this.joueur = joueur;
+        joueur.setPersonnage(this);
     }
     public void setAssassine() {
         this.assassine = true;

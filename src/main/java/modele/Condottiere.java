@@ -31,7 +31,9 @@ public class Condottiere extends Personnage {
                 listePersonnagesDisponibles();
                 System.out.println("Il vous reste " + this.getJoueur().nbPieces() + " pi�ces dans votre tr�sor.");
                 choixJoueur = Interaction.lireUnEntier(0, this.getPlateau().getNombreJoueurs(), "Quel joueur voulez vous attaquer? ( pour ne rien faire)");
-
+                if(choixJoueur == 0){
+                    return;
+                }
                 if(this.getPlateau().getJoueur(choixJoueur-1).getPersonnage().getRang() != 5 || this.getPlateau().getJoueur(choixJoueur-1).getPersonnage().getAssassine()){
                     if (this.getPlateau().getJoueur(choixJoueur - 1).nbQuartiersDansCite() == 0) {
                         System.out.println("Le joueur que vous avez choisi n'as pas de quartier � detruire.");
@@ -48,6 +50,9 @@ public class Condottiere extends Personnage {
 
                 int choixQuartier = Interaction.lireUnEntier(1, this.getPlateau().getJoueur(choixJoueur - 1).nbQuartiersDansCite(), "Quel quartier voulez vous d�truire?");
 
+                if(choixQuartier == 0){
+                    return;
+                }
                 if (this.getPlateau().getJoueur(choixJoueur - 1).getCite()[choixQuartier - 1].getCout() > this.getJoueur().nbPieces()) {
 
                     System.out.println("Vous n'avez pas asser de pieces pour d�truire ce quartier choisissez en un autre. Il vous reste: " +
@@ -114,6 +119,9 @@ public class Condottiere extends Personnage {
                 System.out.println("Il vous reste " + this.getJoueur().nbPieces() + " pi�ces dans votre tr�sor.");
                 System.out.println("Quel joueur voulez vous attaquer? ( pour ne rien faire)");
                 System.out.println(choixJoueur);
+                if(choixJoueur == 0){
+                    return;
+                }
                 if(this.getPlateau().getJoueur(choixJoueur-1).getPersonnage().getRang() != 5 || this.getPlateau().getJoueur(choixJoueur-1).getPersonnage().getAssassine()){
                     if (this.getPlateau().getJoueur(choixJoueur - 1).nbQuartiersDansCite() == 0){
                         System.out.println("Le joueur que vous avez choisi n'as pas de quartier � detruire.");
@@ -141,6 +149,9 @@ public class Condottiere extends Personnage {
                 System.out.println("Quel quartier voulez vous d�truire?");
                 System.out.println(choixQuartier);
 
+                if(choixQuartier == 0){
+                    return;
+                }
                 if (this.getPlateau().getJoueur(choixJoueur - 1).getCite()[choixQuartier - 1].getCout() > this.getJoueur().nbPieces()) {
 
                     System.out.println("Vous n'avez pas asser de pieces pour d�truire ce quartier choisissez en un autre. Il vous reste: " +
@@ -156,6 +167,7 @@ public class Condottiere extends Personnage {
                     this.getPlateau().getJoueur(choixJoueur - 1).getCite()[choixQuartier - 1] = null;
                     choixDeQuartierCorrect = false;
                 }
+                
             } while (choixDeQuartierCorrect);
         }
     }
