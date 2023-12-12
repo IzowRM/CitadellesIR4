@@ -12,15 +12,15 @@ public class Voleur extends Personnage{
     public void utiliserPouvoir() {
         boolean continu = true;
 
-        // pose la question à l'utilisateur
+        // pose la question ï¿½ l'utilisateur
         System.out.println("Quel personnage voulez-vous voler ?");
-        // récupère le choix de l'utilisateur
+        // rï¿½cupï¿½re le choix de l'utilisateur
         super.listePersonnagesDisponibles();
 
         do {
             int  choix = Interaction.lireUnEntier(1, this.getPlateau().getNombrePersonnages(), "Votre choix entre: ");
             if (this.getPlateau().getPersonnage(choix - 1).equals(this)) {
-                System.out.println("Vous ne pouvez pas vous voler vous même");
+                System.out.println("Vous ne pouvez pas vous voler vous mï¿½me");
 
             } else {
                 int pieces = this.getPlateau().getPersonnage(choix-1).getJoueur().nbPieces();
@@ -30,6 +30,10 @@ public class Voleur extends Personnage{
                 continu = false;
             }
         } while (continu);
+    }
+
+    public void utiliserPouvoirAvatar() {
+        System.out.println("NOT READY");
     }
 
 }

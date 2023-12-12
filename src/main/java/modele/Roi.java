@@ -31,4 +31,8 @@ public class Roi extends Personnage {
             System.out.println("Je prend la couronne");
         }
     }
+
+    public void utiliserPouvoirAvatar() {
+        utiliserPouvoir();
+    }
 }

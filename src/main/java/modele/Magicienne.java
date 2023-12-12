@@ -34,22 +34,22 @@ public class Magicienne extends Personnage {
 
 
         boolean continu = true;
-        //demande pour l'échange des cartes.
-        System.out.println("Vous avez " + this.getJoueur().nbQuartiersDansMain() + " Carte dans votre main, voulez Voulez-vous echanger vos cartes avec celles d’un autre joueur ?\n" +
+        //demande pour l'ï¿½change des cartes.
+        System.out.println("Vous avez " + this.getJoueur().nbQuartiersDansMain() + " Carte dans votre main, voulez Voulez-vous echanger vos cartes avec celles dï¿½un autre joueur ?\n" +
                 "(o/n)");
         boolean yesOrNo = Interaction.lireOuiOuNon();
         if (yesOrNo) {
 
             do {
-                System.out.println("Avec qui voulez vous échanger vos cartes ?");
-                // récupère le choix de l'utilisateur
+                System.out.println("Avec qui voulez vous ï¿½changer vos cartes ?");
+                // rï¿½cupï¿½re le choix de l'utilisateur
                 listePersonnagesDisponibles();
                 int choix = Interaction.lireUnEntier(1, this.getPlateau().getNombrePersonnages(), "Votre choix entre: ");
-                //échange les mains des joueurs
+                //ï¿½change les mains des joueurs
 
 
                 if (this.getPlateau().getPersonnage(choix - 1).equals(this)) {
-                    System.out.println("Vous ne pouvez pas vous choir vous même. Choisissez un autre joueur.");
+                    System.out.println("Vous ne pouvez pas vous choir vous mï¿½me. Choisissez un autre joueur.");
 
                 } else {
                     echangeDeListe(this.getPlateau().getPersonnage(choix - 1).getJoueur().getMain(), this.getJoueur().getMain());
@@ -61,18 +61,18 @@ public class Magicienne extends Personnage {
             if (this.getJoueur().nbQuartiersDansMain() == 0) {
                 System.out.println("Vous n'avez pas de carte dans votre main");
             } else {
-                // demande pour le nombre de cartes à échanger
-                System.out.println("Combien de cartes voulez vous échanger ? Il reste "+this.getPlateau().getPioche().nombreElements()
+                // demande pour le nombre de cartes ï¿½ ï¿½changer
+                System.out.println("Combien de cartes voulez vous ï¿½changer ? Il reste "+this.getPlateau().getPioche().nombreElements()
                         +"Carte dans la pioche, Et  vous avez Vous avez " + this.getJoueur().nbQuartiersDansMain()+" Carte");
 
                 int nb = Interaction.lireUnEntier(0, this.getJoueur().nbQuartiersDansMain(), "Votre choix entre: ");
-                // Action à prendre en fonction du nombre de cartes à échanger
+                // Action ï¿½ prendre en fonction du nombre de cartes ï¿½ ï¿½changer
                 if (nb == 0) {
-                    System.out.println("Vous n'avez pas échangé de cartes");
+                    System.out.println("Vous n'avez pas ï¿½changï¿½ de cartes");
                 }
-                // Si le nombre de cartes à échanger est égal au nombre de cartes dans la main du joueur, on échange toutes les cartes
+                // Si le nombre de cartes ï¿½ ï¿½changer est ï¿½gal au nombre de cartes dans la main du joueur, on ï¿½change toutes les cartes
                 else if (nb == this.getJoueur().nbQuartiersDansMain()) {
-                    System.out.println("Vous avez échangé toutes vos cartes");
+                    System.out.println("Vous avez ï¿½changï¿½ toutes vos cartes");
                     ArrayList<Quartier> copieMain = new ArrayList<>();
                     copieMain.addAll(this.getJoueur().getMain());
                     this.getJoueur().getMain().clear();
@@ -84,9 +84,9 @@ public class Magicienne extends Personnage {
 
                 } else {
                     ArrayList<Quartier> copieMain = new ArrayList<>();
-                    //on ajoute les cartes à échanger dans une liste temporaire
+                    //on ajoute les cartes ï¿½ ï¿½changer dans une liste temporaire
                     for (int i = 0; i < nb; i++) {
-                        System.out.println("Vous avez" + this.getJoueur().nbQuartiersDansMain() +" carte dans votre main. Quelle carte voulez vous échanger ?");
+                        System.out.println("Vous avez" + this.getJoueur().nbQuartiersDansMain() +" carte dans votre main. Quelle carte voulez vous ï¿½changer ?");
                         listeLaMainDuJoueur(this.getJoueur());
                         int choix = Interaction.lireUnEntier(1, this.getJoueur().nbQuartiersDansMain(), "Votre choix: ");
                         copieMain.add( this.getJoueur().getMain().get(choix-1));
@@ -101,6 +101,10 @@ public class Magicienne extends Personnage {
                 }
             }
         }
+    }
+
+    public void utiliserPouvoirAvatar() {
+        System.out.println("NOT READY");
     }
 }
 
