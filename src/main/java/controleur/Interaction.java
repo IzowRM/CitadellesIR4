@@ -44,6 +44,8 @@ public class Interaction {
                 System.out.println("Ce n'est pas un entier valide.");
                 sc.next(); // Passe l'entrée incorrecte pour éviter de boucler
                 continu = true; // La boucle continue
+            }finally {
+                sc.nextLine(); // consommer le caractère de nouvelle ligne
             }
         } while (continu);
         return i;

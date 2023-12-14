@@ -6,32 +6,31 @@ import modele.*;
 
 public class Configuration {
 
-    // Methods qui crÃ©e les 54 quartiers pour la pioche
+    // Methods qui crée les 54 quartiers pour la pioche
     public static Pioche nouvellePioche() {
         Pioche p = new Pioche();
         quartiersReligieux(p);
         quartiersMilitaire(p);
         quartiersCommercants(p);
         quartierNobles(p);
-        quartiersMerveilles(p);
-        System.out.println("Pioche crÃ©Ã©e elle comprend " + p.nombreElements()+ " cartes");
+        System.out.println("Pioche créée elle comprend " + p.nombreElements()+ " cartes");
         return p;
     }
 
     public static PlateauDeJeu configurationDeBase(Pioche pc) {
 
-
+        quartiersMerveilles(pc);
         PlateauDeJeu p = new PlateauDeJeu();
-        p.setPioche(pc);
         ajouterPersonnages(p);
         ajouterJoueurs(p);
+        quartiersMerveilles(pc);
         return p;
     }
 
 
     private static void quartiersReligieux(Pioche p) {
         Quartier a;
-        String[] nom = {"temple", "temple", "temple", "Ã©glise", "Ã©glise", "Ã©glise", "monastÃ¨re", "monastÃ¨re", "monastÃ¨re", "cathÃ©drale", "cathÃ©drale"};
+        String[] nom = {"temple", "temple", "temple", "église", "église", "église", "monastère", "monastère", "monastère", "cathédrale", "cathédrale"};
         Integer[] cout = {1, 1, 1, 2, 2, 2, 3, 3, 3, 5, 5};
         for (int i = 0; i < 11; i++) {
             a = new Quartier(nom[i], "RELIGIEUX", cout[i]);
@@ -53,7 +52,7 @@ public class Configuration {
 
     private static void quartiersCommercants(Pioche p) {
         Quartier a;
-        String[] nom = {"taverne", "taverne", "taverne", "taverne", "taverne", "Ã©choppe", "Ã©choppe", "Ã©choppe", "marchÃ©", "marchÃ©", "marchÃ©", "marchÃ©", "comptoir", "comptoir", "comptoir", "port", "port", "port", "hÃ´tel de ville", "hÃ´tel de ville"};
+        String[] nom = {"taverne", "taverne", "taverne", "taverne", "taverne", "échoppe", "échoppe", "échoppe", "marché", "marché", "marché", "marché", "comptoir", "comptoir", "comptoir", "port", "port", "port", "hôtel de ville", "hôtel de ville"};
         Integer[] cout = {1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5};
         for (int i = 0; i < 20; i++) {
             a = new Quartier(nom[i], "COMMERCANT", cout[i]);
@@ -71,10 +70,10 @@ public class Configuration {
         }
     }
 
-    //ImplÃ©mentation des Merveilles
+    //Implémentation des Merveilles
     private static void quartiersMerveilles(Pioche p) {
         Quartier a;
-        String[] nom = {"Laboratoire", "BibliothÃ¨que", "CarriÃ¨re", "Forge", "Manufacture", "Salle des Cartes", "Statue Equestre", "TrÃ©sor ImpÃ©rial", "Tripot", "Fontaine aux Souhaits", "Ecole de Magie", "Dracoport", "Donjon", "Cour des Miracles"};
+        String[] nom = {"Laboratoire", "Bibliothèque", "Carrière", "Forge", "Manufacture", "Salle des Cartes", "Statue Equestre", "Trésor Impérial", "Tripot", "Fontaine aux Souhaits", "Ecole de Magie", "Dracoport", "Donjon", "Cour des Miracles"};
         Integer[] cout = {5, 6, 5, 5, 5, 5, 3, 5, 6, 5, 6, 6, 3, 2};
         for (int i = 0; i < 14; i++) {
             a = new Quartier(nom[i], "MERVEILLE", cout[i]);
@@ -82,7 +81,7 @@ public class Configuration {
         }
     }
 
-    // va crÃ©er la mÃ©thode configurationDeBase
+    // va créer la méthode configurationDeBase
     //Methode qui ajoute les joueurs au plateau
 
     public static void ajouterJoueurs(PlateauDeJeu p) {
@@ -118,12 +117,12 @@ public class Configuration {
             plateau.ajouterPersonnage(personnage);
         }
     }
-    public static  PlateauDeJeu cinfigurationMulti(Pioche pc){
+public static  PlateauDeJeu cinfigurationMulti(Pioche pc){
         PlateauDeJeu p = new PlateauDeJeu();
         ajouterPersonnages(p);
         ajouterJoueurs(p);
         quartiersMerveilles(pc);
         return p;
-    }
+}
 
 }

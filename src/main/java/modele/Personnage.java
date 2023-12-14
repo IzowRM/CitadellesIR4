@@ -64,7 +64,6 @@ public abstract class Personnage {
     }
     public void setJoueur(Joueur joueur) {
         this.joueur = joueur;
-        joueur.setPersonnage(this);
     }
     public void setAssassine() {
         this.assassine = true;
@@ -99,8 +98,6 @@ public abstract class Personnage {
             }
         }
     public abstract void utiliserPouvoir();
-    public abstract void utiliserPouvoirAvatar();
-
     public void reinitialiser(){
         assassine = false;
         vole = false;

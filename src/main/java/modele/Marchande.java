@@ -6,7 +6,7 @@ public class Marchande extends Personnage{
     }
     @Override
     public void utiliserPouvoir() {
-        this.getJoueur().ajouterPieces(1);
+    this.getJoueur().ajouterPieces(1);
     }
     @Override
     public void percevoirRessourcesSpecifiques() {
@@ -19,9 +19,5 @@ public class Marchande extends Personnage{
         }
 
         this.getJoueur().ajouterPieces(n);
-    }
-    @Override
-    public void utiliserPouvoirAvatar() {
-        utiliserPouvoir();
     }
 }

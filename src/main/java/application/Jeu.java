@@ -116,9 +116,7 @@ public class Jeu {
 
     private void initialisation() {
         Pioche pioche = Configuration.nouvellePioche();
-
         this.plateau = Configuration.configurationDeBase(pioche);
-        System.out.println("Nombre de carte dans l'initialisation" + this.plateau.getPioche().nombreElements());
         for (int i = 0; i < this.plateau.getNombreJoueurs(); i++) {
             this.plateau.getJoueur(i).ajouterPieces(2);
             for (int j = 0; j < 4; j++) {
@@ -175,7 +173,7 @@ public class Jeu {
         for (int i = 0; i < this.plateau.getNombrePersonnages(); i++) {
             // 1) Le personnage est-il assassiné ?
             Joueur j = this.plateau.getPersonnage(i).getJoueur();
-            if (!this.plateau.getPersonnage(i).getAssassine()&&!this.plateau.getPersonnage(i).getIsHidden()) {
+            if (!this.plateau.getPersonnage(i).getAssassine()) {
                 //le personnage est volé.
                 if (this.plateau.getPersonnage(i).getVole()) {
 
@@ -216,7 +214,6 @@ public class Jeu {
         int choixjoueurs = Interaction.lireUnEntier(1, 2, "Que faite vous ?: ");
         //Si le joueurs choisi les cartes
         if (choixjoueurs == 1) {
-
             ArrayList<Quartier> choixDecarte = new ArrayList<>();
             System.out.println("Nombre de cates dans pioches "+this.plateau.getPioche().nombreElements());
             choixDecarte.add(this.plateau.getPioche().piocher());

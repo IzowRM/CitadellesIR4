@@ -25,7 +25,7 @@ public class TestVoleur {
         plateau.ajouterPersonnage(voleur);
         Test.test(plateau.getNombrePersonnages()== 3,"nombre de joueurs");
         Test.test(plateau.getPersonnage(2)==voleur,
-                "rï¿½cupï¿½ration du personnage du voleur");
+                "récupération du personnage du voleur");
         Test.test(plateau.getPersonnage(2).getRang()==2,
                 "rang du voleur");
 
@@ -33,7 +33,7 @@ public class TestVoleur {
     public void test2() {
         System.out.println("TEST DU VOL DU ROI");
         PlateauDeJeu plateau = new PlateauDeJeu();
-        // crï¿½ation de trois personnages
+        // création de trois personnages
         Roi roi = new Roi();
         plateau.ajouterPersonnage(roi);
         Assassin assassin = new Assassin();
@@ -41,7 +41,7 @@ public class TestVoleur {
         Voleur voleur = new Voleur();
         plateau.ajouterPersonnage(voleur);
 
-        // crï¿½ation de trois joueurs
+        // création de trois joueurs
         Joueur joueur1 = new Joueur("Milou");
         plateau.ajouterJoueur(joueur1);
         Joueur joueur2 = new Joueur("Billy");
@@ -55,15 +55,14 @@ public class TestVoleur {
         voleur.setJoueur(joueur3);
 
         // on utilise le pouvoir du voleur
-        // NB: seul le roi peut ï¿½tre volï¿½ dans cette situation
+        // NB: seul le roi peut être volé dans cette situation
         roi.ajouterPieces();
         voleur.utiliserPouvoir();
-        // voleur.utiliserPouvoirAvatar();
 
         // tests:
-        Test.test(roi.getVole(),"le roi est bien volï¿½");
-        Test.test(roi.getJoueur().nbPieces()==0, "le trï¿½sor du roi est vide");
-        Test.test(voleur.getJoueur().nbPieces()==2, "le trï¿½sor du voleur contient deux piï¿½ces");
+        Test.test(roi.getVole(),"le roi est bien volé");
+        Test.test(roi.getJoueur().nbPieces()==0, "le trésor du roi est vide");
+        Test.test(voleur.getJoueur().nbPieces()==2, "le trésor du voleur contient deux pièces");
     }
 
 }
