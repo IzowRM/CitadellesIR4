@@ -1,5 +1,7 @@
 package modele;
 
+import java.util.Random;
+
 import controleur.Interaction;
 
 public class Condottiere extends Personnage {
@@ -14,43 +16,52 @@ public class Condottiere extends Personnage {
         boolean choixDejoueurCorrect = true;
         boolean choixDeQuartierCorrect = true;
 
-        //Demande pour détruire un quartier
+        //Demande pour dï¿½truire un quartier
 
-        System.out.println("Voulez vous détruire un quartier ?");
+        System.out.println("Voulez vous dï¿½truire un quartier ?");
         boolean yesOrNo = Interaction.lireOuiOuNon();
         if (!yesOrNo) {
-            System.out.println("Vous n'avez pas détruit de quartier");
+            System.out.println("Vous n'avez pas dï¿½truit de quartier");
         } else {
-            System.out.println("Voici la liste des joueurs avec leurs cité.: ");
+            System.out.println("Voici la liste des joueurs avec leurs cite.: ");
 
             int choixJoueur = 0;
-            // gére correctement la selection du joueur à cibler.
+            // gï¿½re corrctement la selection du joueur ï¿½ ciblï¿½.
             do {
+
                 listePersonnagesDisponibles();
-                System.out.println("Il vous reste " + this.getJoueur().nbPieces() + " pièces dans votre trésor.");
+                System.out.println("Il vous reste " + this.getJoueur().nbPieces() + " piï¿½ces dans votre trï¿½sor.");
                 choixJoueur = Interaction.lireUnEntier(0, this.getPlateau().getNombreJoueurs(), "Quel joueur voulez vous attaquer? ( pour ne rien faire)");
-
-                if (this.getPlateau().getJoueur(choixJoueur - 1).nbQuartiersDansCite() == 0) {
-                    System.out.println("Le joueur que vous avez choisi n'as pas de quartier à detruire.");
-
+                if (choixJoueur == 0) {
+                    return;
+                }
+                if (this.getPlateau().getJoueur(choixJoueur - 1).getPersonnage().getRang() != 5 || this.getPlateau().getJoueur(choixJoueur - 1).getPersonnage().getAssassine()) {
+                    if (this.getPlateau().getJoueur(choixJoueur - 1).nbQuartiersDansCite() == 0) {
+                        System.out.println("Le joueur que vous avez choisi n'as pas de quartier ï¿½ detruire.");
+                    } else {
+                        choixDejoueurCorrect = false;
+                    }
                 } else {
-                    choixDejoueurCorrect = false;
+                    System.out.println("Le joueur que vous avez choisi est un Ã©vÃ©que, vous ne pouvez pas dÃ©truire.");
                 }
             } while (choixDejoueurCorrect);
 
 
             do {
 
-                int choixQuartier = Interaction.lireUnEntier(1, this.getPlateau().getJoueur(choixJoueur - 1).nbQuartiersDansCite(), "Quel quartier voulez vous détruire?");
+                int choixQuartier = Interaction.lireUnEntier(1, this.getPlateau().getJoueur(choixJoueur - 1).nbQuartiersDansCite(), "Quel quartier voulez vous dï¿½truire?");
 
+                if (choixQuartier == 0) {
+                    return;
+                }
                 if (this.getPlateau().getJoueur(choixJoueur - 1).getCite()[choixQuartier - 1].getCout() > this.getJoueur().nbPieces()) {
 
-                    System.out.println("Vous n'avez pas asser de pieces pour détruire ce quartier choisissez en un autre. Il vous reste: " +
+                    System.out.println("Vous n'avez pas asser de pieces pour dï¿½truire ce quartier choisissez en un autre. Il vous reste: " +
                             this.getJoueur().nbPieces() + " piece d'or dans votre tresor.");
                 } else {
 
                     this.getJoueur().retirerPieces(this.getPlateau().getJoueur(choixJoueur - 1).getCite()[choixQuartier - 1].getCout());
-                    this.getPlateau().getJoueur(choixJoueur - 1).getCite()[choixQuartier - 1] = null;
+                    this.getPlateau().getJoueur(choixJoueur-1).retirerQuartierDansCite(this.getPlateau().getJoueur(choixJoueur-1).getCite()[choixQuartier-1].getNom());
                     choixDeQuartierCorrect = false;
                 }
             } while (choixDeQuartierCorrect);
@@ -60,33 +71,133 @@ public class Condottiere extends Personnage {
     @Override
     public void percevoirRessourcesSpecifiques() {
 
+        int n = 0;
         for (int i = 0; i < this.getJoueur().nbQuartiersDansCite(); i++) {
             if (this.getJoueur().getCite()[i].getType().equals("MILITAIRE")) {
-                this.getJoueur().ajouterPieces(1);
+                n++;
             }
         }
 
-
+        this.getJoueur().ajouterPieces(n);
     }
 
     @Override
     public void listePersonnagesDisponibles() {
 
         for (int i = 0; i < this.getPlateau().getNombreJoueurs(); i++) {
-            Joueur j = this.getPlateau().getJoueur(i);
-            System.out.print(i + 1 + " " + j.getNom() + ": ");
-            if (j.nbQuartiersDansCite() == 0) {
+            System.out.print(i + 1 + " " + this.getPlateau().getJoueur(i).getNom() + ": ");
+            if (this.getPlateau().getJoueur(i).nbQuartiersDansCite() == 0) {
                 System.out.print("Cite vide.");
             }
+            if(this.getPlateau().getJoueur(i).nbQuartiersDansCite()!=0) {
 
-            for (int k = 0; k < j.nbQuartiersDansCite(); k++) {
+                System.out.print("la citÃ© contient :" +this.getPlateau().getJoueur(i).nbQuartiersDansCite()+" quartiers: ");
+                for (int k = 0; k < this.getPlateau().getJoueur(i).nbQuartiersDansCite(); k++) {
+                    System.out.println(k+"est le numero de quartier");
+                    System.out.print(k + 1 + " " + this.getPlateau().getJoueur(i).getCite()[k].getNom() + " (coï¿½t " + this.getPlateau().getJoueur(i).getCite()[k].getCout() + "),");
 
-                System.out.print(k + 1 + " " + j.getCite()[k].getNom() + " (coût " + j.getCite()[k].getCout() + "),");
-
+                }
+            }else {
+                System.out.print("la Cite de "+this.getPlateau().getJoueur(i).getNom()+" est vide.");
             }
             System.out.println();
 
         }
 
+    }
+
+    public void utiliserPouvoirAvatar() {
+
+        boolean choixDejoueurCorrect = true;
+        boolean choixDeQuartierCorrect = true;
+
+        System.out.println("Voulez vous dï¿½truire un quartier ?");
+        boolean yesOrNo = new Random().nextBoolean();
+        System.out.println(yesOrNo);
+        if (!yesOrNo) {
+            System.out.println("Vous n'avez pas dï¿½truit de quartier");
+        } else {
+            System.out.println("Voici la liste des joueurs avec leurs citï¿½.: ");
+
+            int choixJoueur = 0;
+            do {
+
+                choixJoueur = new Random().nextInt(this.getPlateau().getNombreJoueurs()) ;
+
+                System.out.println("Il vous reste " + this.getJoueur().nbPieces() + " piï¿½ces dans votre trï¿½sor.");
+                System.out.println("Quel joueur voulez vous attaquer? ( pour ne rien faire)");
+                System.out.println(choixJoueur);
+                if (choixJoueur == 0) {
+                    return;
+                }
+                if (this.getPlateau().getJoueur(choixJoueur).getPersonnage().getRang() != 5 || this.getPlateau().getJoueur(choixJoueur).getPersonnage().getAssassine()) {
+                    if (this.getPlateau().getJoueur(choixJoueur).nbQuartiersDansCite() == 0) {
+                        System.out.println("Le joueur que vous avez choisi n'as pas de quartier ï¿½ detruire.");
+                        choixJoueur++;
+                        if (choixJoueur > this.getPlateau().getNombreJoueurs()) {
+                            choixJoueur = 0;
+                        }
+                    } else {
+                        choixDejoueurCorrect = false;
+                    }
+                } else {
+                    System.out.println("Le joueur que vous avez choisi est un Ã©vÃ©que, vous ne pouvez pas dÃ©truire.");
+                    choixJoueur++;
+                    if (choixJoueur > this.getPlateau().getNombreJoueurs()) {
+                        choixJoueur = 0;
+                    }
+                }
+
+            } while (choixDejoueurCorrect);
+
+
+
+            do {
+                int choixQuartier = new Random().nextInt(this.getPlateau().getJoueur(choixJoueur).nbQuartiersDansCite());
+                System.out.println("Quel quartier voulez vous dï¿½truire?");
+                System.out.println(choixQuartier);
+
+                if (choixQuartier == 0) {
+                    return;
+                }
+                System.out.println("Mon choix de quartier est: "+choixQuartier);
+                System.out.println("Mon chois de joueur est: "+choixJoueur);
+
+                System.out.println("Les joueur ciblÃ© Ã   "+this.getPlateau().getJoueur(choixJoueur).nbQuartiersDansCite());
+                System.out.println("Le quartier est: "+this.getPlateau().getJoueur(choixJoueur).getCite()[choixQuartier].getNom());
+                System.out.println("Le cout du quartier est: "+this.getPlateau().getJoueur(choixJoueur).getCite()[choixQuartier].getCout());
+                if (this.getPlateau().getJoueur(choixJoueur).getCite()[choixQuartier].getCout() > this.getJoueur().nbPieces()) {
+
+                    System.out.println("Vous n'avez pas asser de pieces pour dï¿½truire ce quartier choisissez en un autre. Il vous reste: " +
+                            this.getJoueur().nbPieces() + " piece d'or dans votre tresor.");
+
+                    choixQuartier++;
+                    if (choixQuartier > this.getPlateau().getJoueur(choixJoueur ).nbQuartiersDansCite()) {
+                        choixQuartier = 1;
+                    }
+                } else {
+
+                    this.getJoueur().retirerPieces(this.getPlateau().getJoueur(choixJoueur).getCite()[choixQuartier].getCout());
+                    this.getPlateau().getJoueur(choixJoueur).retirerQuartierDansCite(this.getPlateau().getJoueur(choixJoueur).getCite()[choixQuartier].getNom());
+                    reorganiserTableau(this.getPlateau().getJoueur(choixJoueur).getCite());
+                    choixDeQuartierCorrect = false;
+                }
+
+            } while (choixDeQuartierCorrect);
+        }
+    }
+
+    private void reorganiserTableau(Quartier[] tableau) {
+        int indexDestination = 0;
+
+        for (int i = 0; i < tableau.length; i++) {
+            if (tableau[i] != null) {
+                tableau[indexDestination++] = tableau[i];
+            }
+        }
+        // Remplir les Ã©lÃ©ments restants avec null
+        for (int i = indexDestination; i < tableau.length; i++) {
+            tableau[i] = null;
+        }
     }
 }
