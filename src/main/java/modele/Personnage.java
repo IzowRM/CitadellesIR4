@@ -40,7 +40,7 @@ public abstract class Personnage {
 
     }
     public String getNom() {
-        return nom;
+        return toString();
     }
 
     public Integer getRang() {
@@ -98,6 +98,8 @@ public abstract class Personnage {
             }
         }
     public abstract void utiliserPouvoir();
+    public abstract void utiliserPouvoirAvatar();
+
     public void reinitialiser(){
         assassine = false;
         vole = false;
@@ -122,5 +124,10 @@ public abstract class Personnage {
     }
     public void setPlateau(PlateauDeJeu plateauDeJeu) {
         this.plateauDeJeu = plateauDeJeu;
+    }
+
+    @Override
+    public String toString() {
+        return  nom ;
     }
 }
