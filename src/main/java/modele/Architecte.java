@@ -9,4 +9,7 @@ public class Architecte extends Personnage{
         this.getJoueur().getMain().add( this.getPlateau().getPioche().piocher());
         this.getJoueur().getMain().add( this.getPlateau().getPioche().piocher());
     }
+    public void utiliserPouvoirAvatar() {
+        utiliserPouvoir();
+    }
 }
