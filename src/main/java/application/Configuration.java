@@ -90,11 +90,11 @@ public class Configuration {
 //        System.out.println(" ");
 //
 //       String name = Interaction.lireUneChaine();
-
-        String name = "Robin";
-        Joueur j = new Joueur(name);
-        p.ajouterJoueur(j);
-        for (int i = 0; i < 3; i++) {
+//
+//        String name = "Robin";
+//        Joueur j = new Joueur(name);
+//        p.ajouterJoueur(j);
+        for (int i = 0; i < 4; i++) {
             String nameOrdinateur = "Ordinateur " + (i + 1);
             Joueur jO = new Joueur(nameOrdinateur);
             jO.setIsOrdinateur();

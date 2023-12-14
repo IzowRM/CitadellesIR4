@@ -22,7 +22,7 @@ public class Jeu {
         System.out.println("Bienvenue dans Citadelle");
         System.out.println("Menu: ");
         System.out.println("1. Jouer une partie");
-        System.out.println("2. Afficher les rÃ¨gles");
+        System.out.println("2. Afficher les règles");
         System.out.println("3. Quitter");
 
         boolean continu = true;
@@ -44,7 +44,7 @@ public class Jeu {
     }
 
     private void afficherLesRegles() {
-        System.out.println("Les rÃ¨gles sont les suivantes: ");
+        System.out.println("Les règles sont les suivantes: ");
     }
 
     private void jouerPartie() {
@@ -62,7 +62,7 @@ public class Jeu {
                 System.out.println("Felicitations au vainqueur");
 
                 System.out.println("1. Voulez vous rejouer une partie");
-                System.out.println("2. Afficher les rÃ¨gles");
+                System.out.println("2. Afficher les règles");
                 System.out.println("3. Quitter");
                 System.out.println(" ");
                 calculDesPoints();
@@ -85,7 +85,7 @@ public class Jeu {
         }
         this.plateau.getJoueur(Interaction.returnInt(4)).setPossedeCouronne(true);
 
-        System.out.println("La partie est initialisÃ©e");
+        System.out.println("La partie est initialisée");
     }
 
     private void gestionCouronne() {
@@ -139,61 +139,61 @@ public class Jeu {
 
         //appel des joueurs/personnages :
         for (int i = 0; i < this.plateau.getNombrePersonnages(); i++) {
-            // 1) Le personnage est-il assassinÃ© ?
+            // 1) Le personnage est-il assassiné ?
 
             if (!this.plateau.getPersonnage(i).getAssassine() && this.plateau.getPersonnage(i).getIspick()) {
-                //le personnage est volÃ©.
+                //le personnage est volé.
                 if (this.plateau.getPersonnage(i).getVole()) {
-                    // Le joueurs est volÃ©
+                    // Le joueurs est volé
                     this.plateau.getPersonnage(1).getJoueur().ajouterPieces(this.plateau.getPersonnage(i).getJoueur().nbPieces());
-                    // retirer les pieces du joueurvolÃ©
+                    // retirer les pieces du joueurvolé
                     this.plateau.getPersonnage(i).getJoueur().retirerPieces(this.plateau.getPersonnage(i).getJoueur().nbPieces());
                     //le personnage percevoir Ressources Specifiques
                     this.plateau.getPersonnage(i).percevoirRessourcesSpecifiques();
                     //utilisation des pouvoir des personnages
 
                     if (!this.plateau.getPersonnage(i).getJoueur().getIsOrdinateur()) {
-                        System.out.println("vous nÃ©tes pas un ordi " + this.plateau.getPersonnage(i).getJoueur().getNom() + " personnage " + this.plateau.getPersonnage(i).getNom());
+                        System.out.println("vous nétes pas un ordi " + this.plateau.getPersonnage(i).getJoueur().getNom() + " personnage " + this.plateau.getPersonnage(i).getNom());
                         //le joueur choisi les ressources qu'il veut percevoir
                         piocheCarteOuPiece(i);
                         // le personnage utilise sont pouvoir
                         this.plateau.getPersonnage(i).utiliserPouvoir();
                         buildQuartier(i);
                     } else {
-                        System.out.println("vous Ã©tes un ordi " + this.plateau.getPersonnage(i).getJoueur().getNom() + " personnage " + this.plateau.getPersonnage(i).getNom());
+                        System.out.println("vous étes un ordi " + this.plateau.getPersonnage(i).getJoueur().getNom() + " personnage " + this.plateau.getPersonnage(i).getNom());
                         piocheCarteOuPieceOrdi(i);
                         this.plateau.getPersonnage(i).utiliserPouvoirAvatar();
                         buildQuartierOrdi(i);
-                        System.out.println(this.plateau.getPersonnage(i).getNom() + "a jouÃ©");
+                        System.out.println(this.plateau.getPersonnage(i).getNom() + "a joué");
                         if (this.plateau.getPersonnage(i).getJoueur().nbQuartiersDansCite() == 8 && manageIsFirst()) {
                             this.plateau.getPersonnage(i).getJoueur().isFirst();
                         }
                     }
 
-                } // mÃ©me scÃ©nario sans le vol
+                } // méme scénario sans le vol
                 else {
 
                     if (!this.plateau.getPersonnage(i).getJoueur().getIsOrdinateur()) {
 
-                        System.out.println("vous nÃ©tes pas un ordi " + this.plateau.getPersonnage(i).getJoueur().getNom() + " personnage " + this.plateau.getPersonnage(i).getNom());
+                        System.out.println("vous nétes pas un ordi " + this.plateau.getPersonnage(i).getJoueur().getNom() + " personnage " + this.plateau.getPersonnage(i).getNom());
                         //le joueur choisi les ressources qu'il veut percevoir
                         piocheCarteOuPiece(i);
                         // le personnage utilise sont pouvoir
                         this.plateau.getPersonnage(i).utiliserPouvoir();
                         buildQuartier(i);
                     } else {
-                        System.out.println("vous Ã©tes un ordi " + this.plateau.getPersonnage(i).getJoueur().getNom() + " personnage " + this.plateau.getPersonnage(i).getNom());
+                        System.out.println("vous étes un ordi " + this.plateau.getPersonnage(i).getJoueur().getNom() + " personnage " + this.plateau.getPersonnage(i).getNom());
                         piocheCarteOuPieceOrdi(i);
                         this.plateau.getPersonnage(i).utiliserPouvoirAvatar();
                         buildQuartierOrdi(i);
-                        System.out.println(this.plateau.getPersonnage(i).getNom() + "a jouÃ©");
+                        System.out.println(this.plateau.getPersonnage(i).getNom() + "a joué");
                         if (this.plateau.getPersonnage(i).getJoueur().nbQuartiersDansCite() == 8 && manageIsFirst()) {
                             this.plateau.getPersonnage(i).getJoueur().isFirst();
                         }
                     }
                 }
             } else if (this.plateau.getPersonnage(i).getAssassine()) {
-                System.out.println("Vous etes assassinÃ© vous ne pouvez pas jouer ce tour");
+                System.out.println("Vous etes assassiné vous ne pouvez pas jouer ce tour");
             }
 
 
@@ -209,10 +209,10 @@ public class Jeu {
         return true;
     }
 
-    // method qui pioche deux cartes est remplace l'une dans le packet prend en entrÃ©e le numÃ©ro du personnage qui joue:
+    // method qui pioche deux cartes est remplace l'une dans le packet prend en entrée le numéro du personnage qui joue:
     private void piocheCarteOuPiece(int i) {
         System.out.println("1) Voulez vous piocher?");
-        System.out.println("1) Voulez vous rÃ©cupÃ©rÃ© des piÃ©ces?");
+        System.out.println("1) Voulez vous récupéré des piéces?");
         int choixjoueurs = Interaction.lireUnEntier(1, 2, "Que faite vous ?: ");
         //Si le joueurs choisi les cartes
         if (choixjoueurs == 1) {
@@ -221,13 +221,13 @@ public class Jeu {
             System.out.println("Nombre de cates dans pioches " + this.plateau.getPioche().nombreElements());
             choixDecarte.add(this.plateau.getPioche().piocher());
             choixDecarte.add(this.plateau.getPioche().piocher());
-            System.out.println("Vous avez piochÃ©: " + choixDecarte.get(0) + " et " + choixDecarte.get(1));
+            System.out.println("Vous avez pioché: " + choixDecarte.get(0) + " et " + choixDecarte.get(1));
             int choixCarte = Interaction.lireUnEntier(1, 2, "Quel carte voulez vous garder?: ");
             plateau.getPersonnage(i).getJoueur().ajouterQuartierDansMain(choixDecarte.get(choixCarte - 1));
             choixDecarte.remove(choixCarte - 1);
             plateau.getPioche().ajouter(choixDecarte.get(0));
         }
-        //Si le joueur choisi les piÃ©ces
+        //Si le joueur choisi les piéces
         else {
             this.plateau.getPersonnage(i).getJoueur().ajouterPieces(2);
         }
@@ -243,13 +243,13 @@ public class Jeu {
             System.out.println("Nombre de cates dans pioches " + this.plateau.getPioche().nombreElements());
             choixDecarte.add(this.plateau.getPioche().piocher());
             choixDecarte.add(this.plateau.getPioche().piocher());
-            System.out.println("Vous avez piochÃ©: " + choixDecarte.get(0) + " et " + choixDecarte.get(1));
+            System.out.println("Vous avez pioché: " + choixDecarte.get(0) + " et " + choixDecarte.get(1));
             int choixCarte = new Random().nextInt(2) + 1;
             plateau.getPersonnage(i).getJoueur().ajouterQuartierDansMain(choixDecarte.get(choixCarte - 1));
             choixDecarte.remove(choixCarte - 1);
             plateau.getPioche().ajouter(choixDecarte.get(0));
         }
-        //Si le joueur choisi les piÃ©ces
+        //Si le joueur choisi les piéces
         else {
             this.plateau.getPersonnage(i).getJoueur().ajouterPieces(2);
         }
@@ -368,7 +368,7 @@ public class Jeu {
         List<Personnage> personnageList = new ArrayList<>();
         personnageList.addAll(Arrays.asList(this.plateau.getListePersonnages()));
 
-        //Set les personnages face visible et face cachÃ©
+        //Set les personnages face visible et face caché
         setHiddenPersonnage(personnageList);
         System.out.println("Taille de la liste des personnages: " + personnageList.size());
         System.out.println("Liste des personnages: ");
@@ -418,8 +418,8 @@ public class Jeu {
         int peros2 = Interaction.returnInt(6);
         int peros3 = Interaction.returnInt(5);
 //        int peros4 = Interaction.returnInt(4);
-        System.out.println("Le personnage " + this.plateau.getPersonnage(peros1) + " est Ã©carte face visible");
-//        System.out.println("Le personnage " + this.plateau.getPersonnage(peros2) + " est Ã©carte face visible");
+        System.out.println("Le personnage " + this.plateau.getPersonnage(peros1) + " est écarte face visible");
+//        System.out.println("Le personnage " + this.plateau.getPersonnage(peros2) + " est écarte face visible");
         perso.get(peros1).setIsHidden(true);
         perso.get(peros2).setIsHidden(true);
         perso.get(peros3).setIsHidden(true);
@@ -428,7 +428,7 @@ public class Jeu {
         perso.remove(peros2);
         perso.remove(peros3);
 //        perso.remove(peros4);
-        System.out.println("Deux personnages sont Ã©carte face cacher");
+        System.out.println("Deux personnages sont écarte face cacher");
     }
 
     private void listePersoDispo(List<Personnage> listPerso) {
@@ -464,7 +464,7 @@ private void calculDesPoints() {
         System.out.println(joueur.getNom() + ": " + points + " points");
     }
 
-    // DÃ©signation du gagnant (le dernier de la liste triÃ©e)
+    // Désignation du gagnant (le dernier de la liste triée)
     if (!list.isEmpty()) {
         Map.Entry<Joueur, Integer> winnerEntry = list.get(list.size() - 1);
         Joueur winner = winnerEntry.getKey();

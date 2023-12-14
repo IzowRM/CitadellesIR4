@@ -6,6 +6,7 @@ import modele.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
@@ -100,9 +101,8 @@ public class Main {
         // Créer une liste
 //
 //
-        Jeu jeu = new Jeu();
-        jeu.jouer();
+      Jeu jeu = new Jeu();
+       jeu.jouer();
 
+    }}
 
-    }
-}
