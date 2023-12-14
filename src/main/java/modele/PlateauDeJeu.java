@@ -11,7 +11,7 @@ public class PlateauDeJeu {
 
     public PlateauDeJeu() {
         this.listePersonnages = new Personnage[8];
-        this.listeJoueurs = new Joueur[9];
+        this.listeJoueurs = new Joueur[4];
         this.pioche = new Pioche();
         this.nombrePersonnages = 0;
         this.nombreJoueurs = 0;
@@ -27,6 +27,9 @@ public class PlateauDeJeu {
 
     public Pioche getPioche() {
         return pioche;
+    }
+    public void setPioche(Pioche pioche) {
+        this.pioche = pioche;
     }
 
     public Personnage getPersonnage(Integer i) {
